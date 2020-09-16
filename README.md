@@ -24,7 +24,7 @@ Il est préférable de déporter toute manipulation de tableau, de localStorage 
 * Créer un service nommé `ArticleService` dans le répertoire `common`.
 * Injecter le service `ArticleService` dans le component `ArticleListComponent`.
 * Déporter toute la logique de gestion des articles dans `ArticleService`
-* Refactoré `ArticleListComponent` afin qu'il n'y ait plus aucun `push`, `slice`, `findIndex`, `localStorage`, `JSON` etc dans ce component.
+* Refactorer `ArticleListComponent` afin qu'il n'y ait plus aucun `push`, `slice`, `findIndex`, `localStorage`, `JSON` etc dans ce component.
 * La manipulation d'article (`push`, `slice` ...) dans le component `ArticleListComponent` doit uniquement se faire à travers le service `ArticleService`
 
 ## Partie 2
@@ -32,8 +32,8 @@ Il est préférable de déporter toute manipulation de tableau, de localStorage 
 Le component `ArticleListDeletedComponent` n'est pas opérationnel, aucun article supprimé n'est affiché dans le tableau donc il nous est impossible de restaurer un article supprimé par erreur.
 
 * Injecter le service `ArticleService` dans le component `ArticleListDeletedComponent`.
-* codé la **récupération** des articles supprimés
-* codé la **restauration** des articles supprimés
+* Coder la **récupération** des articles supprimés
+* Coder la **restauration** des articles supprimés
 
 **Attention il a peut être d'autres choses à corriger dans le component `ArticleListComponent` et `ArticleListDeletedComponent` ;)**
 
