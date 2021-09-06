@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../common/article';
+import { ArticleService } from '../common/article.service';
 
 @Component({
   selector: 'app-articles-list',
@@ -9,16 +10,14 @@ import { Article } from '../common/article';
 export class ArticlesListComponent implements OnInit {
   // Model de donée d'un article
   article: Article;
-  // Liste des articles disponnible
+  // Liste des articles disponible
   articles: Article[];
 
-  constructor() {}
+  constructor(private articleService: ArticleService) {}
 
   ngOnInit() {
-    // Récupération des articles à partir du local storage
-    this.articles = this.getFromLocalStorage();
-    // Initialisation du model de donnée
-    this.article = new Article();
+    this.articles = this.articleService.getArticles();
+    this.reinitModel();
   }
 
   /**
@@ -26,10 +25,8 @@ export class ArticlesListComponent implements OnInit {
    * @param article Nouvelle article
    */
   createArticle(article) {
-    // Ajout de l'article à la liste des articles
-    this.articles.push(article);
-    // Réinitialisation du model
-    this.article = new Article();
+    this.articleService.createArticle(article);
+    this.reinitModel();
   }
 
   /**
@@ -37,21 +34,10 @@ export class ArticlesListComponent implements OnInit {
    * @param article Article à supprimer
    */
   deleteArticle(article: Article) {
-    // Récupération de l'index de l'article à supprimer
-    const index = this.articles.findIndex( x => x.id === article.id);
-    // Suppréssion de l'article du tableau
-    this.articles.splice(index, 1);
+    this.articleService.deleteArticle(article);
   }
 
-  /**
-   * Récupération du tableau d'articles stocké dans le local storage
-   */
-  getFromLocalStorage(): Article[] {
-    // Récupération des artciles en format 'string'
-    const stringData = localStorage.getItem('articles');
-    // Converstion des données de type 'string' en objet Javascript
-    const articles: Article[] = JSON.parse(stringData);
-
-    return articles;
+  reinitModel() {
+    this.article = new Article();
   }
 }

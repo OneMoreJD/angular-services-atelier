@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../common/article';
+import { ArticleService } from '../common/article.service';
 
 @Component({
   selector: 'app-articles-list-deleted',
@@ -10,16 +11,16 @@ export class ArticlesListDeletedComponent implements OnInit {
   // Liste des articles non disponnible
   articlesDeleted: Article[];
 
-  constructor() { }
+  constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
-    // TODO récupération des articles non disponible à partir d'un service
+    this.articlesDeleted = this.articleService.getDeletedArticles();
   }
 
   /**
    * Restaure un article supprimé
    */
-  restore() {
-    // TODO réstauration de l'article à partir d'un service
+  restore(article: Article) {
+    this.articleService.restore(article);
   }
 }
